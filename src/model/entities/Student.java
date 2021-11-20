@@ -4,12 +4,14 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="students")
-public class Student extends Customer{
+@DiscriminatorValue("student")
+public class Student extends Customer {
 
 	@Column(name="enter_date")
 	private Date enterDate;

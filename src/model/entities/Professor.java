@@ -4,11 +4,13 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="professors")
+@DiscriminatorValue("professor")
 public class Professor extends Customer {
 	
 	@Column(name="department")
