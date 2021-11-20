@@ -8,13 +8,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="customer")
+@MappedSuperclass
 public class Customer {
 	
 	@Id
@@ -34,7 +32,6 @@ public class Customer {
 	private List<Order> orders = new ArrayList<>();
 	
 	public Customer(String bronco_id, Date dob, String phone, Address address, List<Order> orders) {
-		super();
 		this.bronco_id = bronco_id;
 		this.dob = dob;
 		this.phone = phone;
@@ -100,8 +97,7 @@ class Address {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	
-	
+		
 }
 
 	
