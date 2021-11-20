@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="studentprofessor")
+@Table(name="studentprofessors")
 @DiscriminatorValue("studentprofessor")
 public class StudentProfessor extends Customer {
 
