@@ -30,4 +30,14 @@ public class HistoricalPrice {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="product_id")
 	private Product product;
+	
+	public HistoricalPrice() {}
+
+	public HistoricalPrice(int id, Date date, double price, Product product) {
+		this.id = id;
+		this.date = date;
+		this.price = price;
+		this.product = product;
+	}
+	
 }

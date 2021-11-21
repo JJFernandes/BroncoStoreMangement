@@ -2,7 +2,6 @@ package model.entities;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,13 +35,15 @@ public class Order {
 	private Customer customer;
 	
 	@ManyToMany(mappedBy = "orders")
-	private List<Product> products = new ArrayList<>(); //I assume the price can be accessible from each product
+	private List<Product> products; //I assume the price can be accessible from each product
 	
 	@ElementCollection
-	private List<Integer> quantities = new ArrayList<>();
+	private List<Integer> quantities;
 
 	@Column(name="total_price")
 	private double total_price;
+	
+	public Order() {}
 
 	public Order(int id, Date date, Time time, Customer customer, List<Product> products, List<Integer> quantities, double total_price) {
 		this.id = id;

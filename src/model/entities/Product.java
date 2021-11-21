@@ -31,7 +31,7 @@ public class Product {
 	private double price;
 	
 	@OneToMany(mappedBy="product", cascade = CascadeType.PERSIST)
-	private List<HistoricalPrice> history = new ArrayList<>();
+	private List<HistoricalPrice> history;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -39,6 +39,18 @@ public class Product {
     		joinColumns = @JoinColumn(name = "product_id"),
     		inverseJoinColumns = @JoinColumn(name = "order_id")
     		)	
-	private List<Order> orders = new ArrayList<>();
+	private List<Order> orders;
+
+	public Product() {}
+	
+	public Product(int id, String name, double price, List<HistoricalPrice> history, List<Order> orders) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.history = history = new ArrayList<HistoricalPrice>();
+		this.orders = orders = new ArrayList<Order>();
+	}
+	
+	
 	
 }

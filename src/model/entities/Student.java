@@ -1,15 +1,12 @@
 package model.entities;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="students")
 @DiscriminatorValue("student")
 public class Student extends Customer {
 
@@ -24,10 +21,12 @@ public class Student extends Customer {
 	
 	@Column(name="minor")
 	private String minor;
+	
+	public Student() {}
 
-	public Student(String bronco_id, Date dob, String phone, Address address, List<Order> orders, Date enterDate,
+	public Student(String bronco_id, String name, Date dob, String phone, Address address, Date enterDate,
 			Date gradDate, String major, String minor) {
-		super(bronco_id, dob, phone, address, orders);
+		super(bronco_id, name, dob, phone, address);
 		this.enterDate = enterDate;
 		this.gradDate = gradDate;
 		this.major = major;
