@@ -132,6 +132,8 @@ public class CreateDBdemo {
 			orderHolder.addProductAndQuantity(productHolder, 2);
 			orderHolder.addProductAndQuantity(product2Holder, 5);
 			
+			studentHolder.addNewOrder(orderHolder);
+			
 			//persist Order to database
 			session.save(orderHolder);
 			
