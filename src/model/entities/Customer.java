@@ -48,7 +48,13 @@ public abstract class Customer {
 		this.dob = dob;
 		this.phone = phone;
 		this.address = address;
-		this.orders = new ArrayList<Order>();
+	}
+	
+	public void addNewOrder(Order o) {
+		if(this.orders == null) {
+			this.orders = new ArrayList<Order>();
+		}
+		this.orders.add(o);
 	}
 
 }

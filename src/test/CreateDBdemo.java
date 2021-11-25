@@ -1,6 +1,8 @@
 package test;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,6 +38,7 @@ public class CreateDBdemo {
 			
 			session.beginTransaction();
 			
+			//create Student customer
 			Customer studentHolder = new Student(
 					"012071033", //bronco id
 					"Joshua Fernandes", //name
@@ -48,6 +51,11 @@ public class CreateDBdemo {
 					"N/A" //minor
 					);
 			
+			//persist Student Customer to database
+			session.save(studentHolder);
+			
+			
+			//create Professor customer
 			Customer professorHolder = new Professor(
 					"011580335", //bronco id
 					"Neil Gilligan", //name
@@ -59,6 +67,12 @@ public class CreateDBdemo {
 					"Cyber Security" //research
 					);
 			
+			//persist Professor Customer to database
+			session.save(professorHolder);
+			
+			
+			
+			//create StudentProfessor customer
 			Customer studentProfessorHolder = new StudentProfessor(
 					"013648922", //bronco id
 					"Morris Wagner", //name
@@ -74,10 +88,55 @@ public class CreateDBdemo {
 					"Genetics" //research
 					);
 			
-			session.save(studentHolder);
-			session.save(professorHolder);
+			//persist StudentProfessor to database
 			session.save(studentProfessorHolder);
 			
+			
+			
+			//create Pencil product
+			Product productHolder = new Product("Pencil");
+			//create HistoricalPrice
+			HistoricalPrice hpHolder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.25));
+			//set Product price to HistoricalPrice and add HistoricalPrice to Product history
+			productHolder.setPrice(hpHolder);
+			//set HistoricalPrice product link to Product
+			hpHolder.setProduct(productHolder);
+			
+			//persist Product and Historical Price to database
+			session.save(productHolder);
+			session.save(hpHolder);
+			
+			
+			
+			Product product2Holder = new Product("Paper");
+			HistoricalPrice hp2Holder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.10));
+			product2Holder.setPrice(hp2Holder);
+			hp2Holder.setProduct(product2Holder);
+			HistoricalPrice hp3Holder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.15));
+			product2Holder.setPrice(hp3Holder);
+			hp3Holder.setProduct(product2Holder);
+			
+			session.save(productHolder);
+			session.save(hpHolder);
+			session.save(product2Holder);
+			session.save(hp2Holder);
+			session.save(hp3Holder);
+			
+			
+			
+			//create Order
+			Order orderHolder = new Order();
+			//set Order customer to Student Customer
+			orderHolder.setCustomer(studentHolder);
+			//add Product and Quantity to product_quantity HashMap
+			orderHolder.addProductAndQuantity(productHolder, 2);
+			orderHolder.addProductAndQuantity(product2Holder, 5);
+			
+			//persist Order to database
+			session.save(orderHolder);
+			
+			
+			//commit changes to database
 			session.getTransaction().commit();
 			
 		}catch (Exception ex) {

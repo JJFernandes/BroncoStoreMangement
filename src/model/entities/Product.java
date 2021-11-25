@@ -1,5 +1,8 @@
 package model.entities;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,30 +30,28 @@ public class Product {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="price")
-	private double price;
+	@Column(name="price", precision = 8, scale = 2)
+	private BigDecimal price;
 	
-	@OneToMany(mappedBy="product", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="product", cascade = CascadeType.PERSIST, orphanRemoval=true)
 	private List<HistoricalPrice> history;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-    		name = "order_product",
-    		joinColumns = @JoinColumn(name = "product_id"),
-    		inverseJoinColumns = @JoinColumn(name = "order_id")
-    		)	
-	private List<Order> orders;
-
 	public Product() {}
 	
-	public Product(int id, String name, double price, List<HistoricalPrice> history, List<Order> orders) {
-		this.id = id;
+	public Product(String name) {
 		this.name = name;
-		this.price = price;
-		this.history = history = new ArrayList<HistoricalPrice>();
-		this.orders = orders = new ArrayList<Order>();
 	}
 	
+	public void setPrice(HistoricalPrice hp) {
+		if(this.history == null) {
+			this.history = new ArrayList<HistoricalPrice>();
+		}
+		this.price = hp.getPrice();
+		this.history.add(hp);
+	}
 	
+	public BigDecimal getPrice() {
+		return this.price;
+	}
 	
 }

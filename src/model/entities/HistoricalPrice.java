@@ -1,10 +1,12 @@
 package model.entities;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,20 +26,26 @@ public class HistoricalPrice {
 	@Column(name="date")
 	private Date date;
 	
-	@Column(name="price")
-	private double price;
+	@Column(name="price", precision = 8, scale = 2)
+	private BigDecimal price;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="product_id")
 	private Product product;
 	
 	public HistoricalPrice() {}
 
-	public HistoricalPrice(int id, Date date, double price, Product product) {
-		this.id = id;
+	public HistoricalPrice(Date date, BigDecimal price) {
 		this.date = date;
 		this.price = price;
-		this.product = product;
+	}
+	
+	public void setProduct(Product p) {
+		this.product = p;
+	}
+	
+	public BigDecimal getPrice() {
+		return this.price;
 	}
 	
 }
