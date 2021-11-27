@@ -27,7 +27,7 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="382.0" layoutY="336.0" mnemonicParsing="false" text="Create New Product" />
-      <Button layoutX="295.0" layoutY="336.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="createProduct_Btn" layoutX="382.0" layoutY="336.0" mnemonicParsing="false" text="Create New Product" />
+      <Button fx:id="cancel_Btn" layoutX="295.0" layoutY="336.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>
