@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +15,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import model.entities.Address;
+import model.logic.CustomerRegistrationLogic;
 
 public class CustomerDetailsController {
 
@@ -70,21 +75,105 @@ public class CustomerDetailsController {
 	@FXML
 	private TextField research_txtF;
 	
+	@FXML
+	private Button createCustomer_Btn;
+	
 	
 	public void initialize() {
 		
 		customerType.selectedToggleProperty().addListener(observable -> {
-					if(customerType.getSelectedToggle() == student_radBtn) {
-						studentForm.setDisable(false);
-						professorForm.setDisable(true);
-					}else if(customerType.getSelectedToggle() == professor_radBtn) {
-						studentForm.setDisable(true);
-						professorForm.setDisable(false);
-					}else if(customerType.getSelectedToggle() == studentProf_radBtn) {
-						studentForm.setDisable(false);
-						professorForm.setDisable(false);
-					}
+			if(customerType.getSelectedToggle() == student_radBtn) {
+				studentForm.setDisable(false);
+				professorForm.setDisable(true);
+			}else if(customerType.getSelectedToggle() == professor_radBtn) {
+				studentForm.setDisable(true);
+				professorForm.setDisable(false);
+			}else if(customerType.getSelectedToggle() == studentProf_radBtn) {
+				studentForm.setDisable(false);
+				professorForm.setDisable(false);
+			}
 					
-				});
+		});
+		
+		createCustomer_Btn.setOnAction(event -> {
+			
+			if(customerType.getSelectedToggle() == student_radBtn) {
+				buttonActionCreateNewStudentCustomer();
+			}else if(customerType.getSelectedToggle() == professor_radBtn) {
+				buttonActionCreateNewProfessorCustomer();
+			}else if(customerType.getSelectedToggle() == studentProf_radBtn) {
+				buttonActionCreateNewStudentProfessorCustomer();
+			}
+			
+			
+			try {
+				switchToView(event, "/fxml/LandingView.fxml");
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+		});
+	}
+	
+	public void switchToView(ActionEvent event, String fxmlPath) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void buttonActionCreateNewStudentCustomer() {
+		
+		String[] addr = this.address_txtF.getText().split(",");
+		CustomerRegistrationLogic.createNewStudentCustomer(
+				this.broncoID_txtF.getText(),
+				this.name_txtF.getText(),
+				Date.valueOf(this.dob_datepick.getValue()),
+				this.phone_txtF.getText(),
+				new Address(addr[0], addr[1], addr[2], addr[3], addr[4]),
+				Date.valueOf(this.enter_datepick.getValue()),
+				Date.valueOf(this.grad_datepick.getValue()),
+				this.major_txtF.getText(),
+				this.minor_txtF.getText()
+				);
+		
+	}
+	
+	public void buttonActionCreateNewProfessorCustomer() {
+		
+		String[] addr = this.address_txtF.getText().split(",");
+		CustomerRegistrationLogic.createNewProfessorCustomer(
+				this.broncoID_txtF.getText(),
+				this.name_txtF.getText(),
+				Date.valueOf(this.dob_datepick.getValue()),
+				this.phone_txtF.getText(),
+				new Address(addr[0], addr[1], addr[2], addr[3], addr[4]),
+				this.dept_txtF.getText(),
+				this.office_txtF.getText(),
+				this.research_txtF.getText()
+				);
+		
+	}
+
+	public void buttonActionCreateNewStudentProfessorCustomer() {
+	
+		String[] addr = this.address_txtF.getText().split(",");
+		CustomerRegistrationLogic.createNewStudentProfessorCustomer(
+				this.broncoID_txtF.getText(),
+				this.name_txtF.getText(),
+				Date.valueOf(this.dob_datepick.getValue()),
+				this.phone_txtF.getText(),
+				new Address(addr[0], addr[1], addr[2], addr[3], addr[4]),
+				Date.valueOf(this.enter_datepick.getValue()),
+				Date.valueOf(this.grad_datepick.getValue()),
+				this.major_txtF.getText(),
+				this.minor_txtF.getText(),
+				this.dept_txtF.getText(),
+				this.office_txtF.getText(),
+				this.research_txtF.getText()
+				);
+	
 	}
 }
