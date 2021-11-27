@@ -130,7 +130,8 @@ public class CreateDBdemo {
 			orderHolder.setCustomer(studentHolder);
 			//add Product and Quantity to product_quantity HashMap
 			orderHolder.addProductAndQuantity(productHolder, 2);
-			orderHolder.addProductAndQuantity(product2Holder, 5);
+			orderHolder.addProductAndQuantity(product2Holder, 5);	
+			studentHolder.addNewOrder(orderHolder);
 			
 			//persist Order to database
 			session.save(orderHolder);
