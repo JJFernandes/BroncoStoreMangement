@@ -19,7 +19,9 @@ import javafx.stage.Stage;
 import model.entities.Address;
 import model.logic.CustomerRegistrationLogic;
 
-public class CustomerDetailsController {
+public class CustomerDetailsController extends BasicController{
+	
+	private final String landingViewPath = "/fxml/LandingView.fxml";
 
 	@FXML
 	private TextField broncoID_txtF;
@@ -101,7 +103,7 @@ public class CustomerDetailsController {
 		cancel_Btn.setOnAction(event -> {
 			
 			try {
-				switchToView(event, "/fxml/LandingView.fxml");
+				switchToView(event, landingViewPath);
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -127,14 +129,6 @@ public class CustomerDetailsController {
 			
 			
 		});
-	}
-	
-	public void switchToView(ActionEvent event, String fxmlPath) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
 	}
 	
 	public void buttonActionCreateNewStudentCustomer() {

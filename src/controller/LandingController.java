@@ -11,7 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class LandingController {
+public class LandingController extends BasicController{
+	
+	private final String customerRegViewPath = "/fxml/CustomerDetailsView.fxml";
+	private final String productRegViewPath = "/fxml/ProductDetailsView.fxml";
 
 	@FXML
 	private Button regCustomerBtn;
@@ -32,14 +35,18 @@ public class LandingController {
 		
 		regCustomerBtn.setOnAction(event -> {
 			try {
-				switchToView(event, "/fxml/CustomerDetailsView.fxml");
+				switchToView(event, customerRegViewPath);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 		
 		regProductBtn.setOnAction(event -> {
-			
+			try {
+				switchToView(event, productRegViewPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 		
 		regOrderBtn.setOnAction(event -> {
@@ -53,15 +60,6 @@ public class LandingController {
 		genReportBtn.setOnAction(event -> {
 			
 		});
-	}
-	
-	public void switchToView(ActionEvent event, String fxmlPath) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
+	}	
 
 }
