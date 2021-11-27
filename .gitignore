@@ -27,4 +27,4 @@ bin/hibernate.cfg.xml
 src/hibernate.cfg.xml
 
 # bin fxml files
-bin/*.fxml
+bin/fxml/*.fxml
