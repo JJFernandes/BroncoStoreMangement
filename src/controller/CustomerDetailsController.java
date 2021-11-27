@@ -78,6 +78,9 @@ public class CustomerDetailsController {
 	@FXML
 	private Button createCustomer_Btn;
 	
+	@FXML
+	private Button cancel_Btn;
+	
 	
 	public void initialize() {
 		
@@ -93,6 +96,16 @@ public class CustomerDetailsController {
 				professorForm.setDisable(false);
 			}
 					
+		});
+		
+		cancel_Btn.setOnAction(event -> {
+			
+			try {
+				switchToView(event, "/fxml/LandingView.fxml");
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		});
 		
 		createCustomer_Btn.setOnAction(event -> {

@@ -92,6 +92,7 @@
             <TextField fx:id="research_txtF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="createCustomer_Btn" layoutX="334.0" layoutY="485.0" mnemonicParsing="false" text="Create New Customer" />
+      <Button fx:id="createCustomer_Btn" layoutX="382.0" layoutY="486.0" mnemonicParsing="false" text="Create New Customer" />
+      <Button fx:id="cancel_Btn" layoutX="286.0" layoutY="486.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>
