@@ -25,3 +25,6 @@ hs_err_pid*
 # hibernate config file
 bin/hibernate.cfg.xml
 src/hibernate.cfg.xml
+
+# bin fxml files
+bin/*.fxml
