@@ -72,24 +72,24 @@ public class CreateDBdemo {
 			
 			
 			
-//			//create StudentProfessor customer
-//			Customer studentProfessorHolder = new StudentProfessor(
-//					"013648922", //bronco id
-//					"Morris Wagner", //name
-//					Date.valueOf("1993-07-20"), //dob
-//					"011-962-7516", //phone
-//					new Address("9278", "Newland Rd.", "Waterford", "CA", "51694"), //address
-//					Date.valueOf("2013-08-20"), //enter date
-//					Date.valueOf("2071-07-05"), //grad date
-//					"Biology", //major
-//					"Biochemistry", //minor
-//					"Biology", //department
-//					"4-32", //ofice
-//					"Genetics" //research
-//					);
-//			
-//			//persist StudentProfessor to database
-//			session.save(studentProfessorHolder);
+			//create StudentProfessor customer
+			Customer studentProfessorHolder = new StudentProfessor(
+					"013648922", //bronco id
+					"Morris Wagner", //name
+					Date.valueOf("1993-07-20"), //dob
+					"011-962-7516", //phone
+					new Address("9278", "Newland Rd.", "Waterford", "CA", "51694"), //address
+					Date.valueOf("2013-08-20"), //enter date
+					Date.valueOf("2071-07-05"), //grad date
+					"Biology", //major
+					"Biochemistry", //minor
+					"Biology", //department
+					"4-32", //ofice
+					"Genetics" //research
+					);
+			
+			//persist StudentProfessor to database
+			session.save(studentProfessorHolder);
 			
 			
 			
@@ -116,8 +116,6 @@ public class CreateDBdemo {
 			product2Holder.setPrice(hp3Holder);
 			hp3Holder.setProduct(product2Holder);
 			
-			session.save(productHolder);
-			session.save(hpHolder);
 			session.save(product2Holder);
 			session.save(hp2Holder);
 			session.save(hp3Holder);

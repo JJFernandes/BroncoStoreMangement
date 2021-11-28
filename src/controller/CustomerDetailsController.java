@@ -9,15 +9,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.entities.Address;
-import model.logic.CustomerRegistrationLogic;
+import model.logic.CustomerLogic;
 
 public class CustomerDetailsController extends BasicController{
 	
@@ -83,6 +85,8 @@ public class CustomerDetailsController extends BasicController{
 	@FXML
 	private Button cancel_Btn;
 	
+	private Alert a = new Alert(AlertType.NONE);
+	
 	
 	public void initialize() {
 		
@@ -118,23 +122,15 @@ public class CustomerDetailsController extends BasicController{
 				buttonActionCreateNewProfessorCustomer();
 			}else if(customerType.getSelectedToggle() == studentProf_radBtn) {
 				buttonActionCreateNewStudentProfessorCustomer();
-			}
-			
-			
-			try {
-				switchToView(event, "/fxml/LandingView.fxml");
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+			}			
 			
 		});
 	}
 	
-	public void buttonActionCreateNewStudentCustomer() {
+	private void buttonActionCreateNewStudentCustomer() {
 		
 		String[] addr = this.address_txtF.getText().split(",");
-		CustomerRegistrationLogic.createNewStudentCustomer(
+		boolean success = CustomerLogic.createNewStudentCustomer(
 				this.broncoID_txtF.getText(),
 				this.name_txtF.getText(),
 				Date.valueOf(this.dob_datepick.getValue()),
@@ -146,12 +142,14 @@ public class CustomerDetailsController extends BasicController{
 				this.minor_txtF.getText()
 				);
 		
+		showAlert(success);
+		
 	}
 	
-	public void buttonActionCreateNewProfessorCustomer() {
+	private void buttonActionCreateNewProfessorCustomer() {
 		
 		String[] addr = this.address_txtF.getText().split(",");
-		CustomerRegistrationLogic.createNewProfessorCustomer(
+		boolean success = CustomerLogic.createNewProfessorCustomer(
 				this.broncoID_txtF.getText(),
 				this.name_txtF.getText(),
 				Date.valueOf(this.dob_datepick.getValue()),
@@ -162,12 +160,14 @@ public class CustomerDetailsController extends BasicController{
 				this.research_txtF.getText()
 				);
 		
+		showAlert(success);
+		
 	}
 
-	public void buttonActionCreateNewStudentProfessorCustomer() {
+	private void buttonActionCreateNewStudentProfessorCustomer() {
 	
 		String[] addr = this.address_txtF.getText().split(",");
-		CustomerRegistrationLogic.createNewStudentProfessorCustomer(
+		boolean success = CustomerLogic.createNewStudentProfessorCustomer(
 				this.broncoID_txtF.getText(),
 				this.name_txtF.getText(),
 				Date.valueOf(this.dob_datepick.getValue()),
@@ -181,6 +181,20 @@ public class CustomerDetailsController extends BasicController{
 				this.office_txtF.getText(),
 				this.research_txtF.getText()
 				);
+		
+		showAlert(success);
 	
+	}
+	
+	private void showAlert(boolean success) {
+		if(success == false) {
+			a.setAlertType(AlertType.ERROR);
+			a.setContentText("Customer id \"" + this.broncoID_txtF.getText() + "\" already exists.");
+			a.show();
+		} else {
+			a.setAlertType(AlertType.CONFIRMATION);
+			a.setContentText("Customer \"" + this.broncoID_txtF.getText() + "\" created successfully.");
+			a.show();
+		}
 	}
 }

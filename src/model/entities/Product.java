@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Product {
 	@Column(name="price", precision = 8, scale = 2)
 	private BigDecimal price;
 	
-	@OneToMany(mappedBy="product", cascade = CascadeType.PERSIST, orphanRemoval=true)
+	@OneToMany(mappedBy="product", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<HistoricalPrice> history;
 	
 	public Product() {}
@@ -49,9 +50,27 @@ public class Product {
 		this.price = hp.getPrice();
 		this.history.add(hp);
 	}
+
+	public Integer getId() {
+		return id;
+	}
 	
+	public String getName() {
+		return name;
+	}
+
+
 	public BigDecimal getPrice() {
 		return this.price;
+	}
+	
+	public List<HistoricalPrice> getHistory(){
+		return this.history;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", history=" + history + "]";
 	}
 	
 }

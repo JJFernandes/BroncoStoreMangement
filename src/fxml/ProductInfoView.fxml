@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductInfoController">
+   <children>
+      <TableView fx:id="products_tbl" layoutX="39.0" layoutY="49.0" prefHeight="514.0" prefWidth="344.0">
+         <columns>
+            <TableColumn fx:id="products_col" prefWidth="343.0" text="Products">
+               <columns>
+                  <TableColumn fx:id="prod_id_col" prefWidth="69.0" text="ID" />
+                  <TableColumn fx:id="prod_name_col" prefWidth="163.0" text="Name" />
+                  <TableColumn fx:id="prod_price_col" prefWidth="111.0" text="Price" />
+               </columns>
+            </TableColumn>
+         </columns>
+      </TableView>
+      <TableView fx:id="history_tbl" layoutX="479.0" layoutY="238.0" prefHeight="248.0" prefWidth="239.0">
+         <columns>
+            <TableColumn fx:id="history_col" prefWidth="238.0" text="Price History">
+               <columns>
+                  <TableColumn fx:id="hist_date_col" prefWidth="119.0" text="Date" />
+                  <TableColumn fx:id="hist_price_col" prefWidth="119.0" text="Price" />
+               </columns>
+            </TableColumn>
+         </columns>
+      </TableView>
+      <GridPane hgap="10.0" layoutX="485.0" layoutY="49.0" prefHeight="155.0" prefWidth="226.0" vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="90.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="126.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Selected ID" />
+            <Label text="Selected Name" GridPane.rowIndex="1" />
+            <Label text="Selected Price" GridPane.rowIndex="2" />
+            <Label fx:id="id_lbl" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="name_lbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="price_lbl" text="\$0.00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="setNewPrice_Btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Set New Price" GridPane.rowIndex="4" />
+            <TextField fx:id="newPrice_txtF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <Button fx:id="cancel_Btn" layoutX="573.0" layoutY="519.0" mnemonicParsing="false" text="Cancel" />
+   </children>
+</AnchorPane>

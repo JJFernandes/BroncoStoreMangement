@@ -29,7 +29,7 @@ public class HistoricalPrice {
 	@Column(name="price", precision = 8, scale = 2)
 	private BigDecimal price;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="product_id")
 	private Product product;
 	
@@ -46,6 +46,10 @@ public class HistoricalPrice {
 	
 	public BigDecimal getPrice() {
 		return this.price;
+	}
+	
+	public Date getDate() {
+		return this.date;
 	}
 	
 }

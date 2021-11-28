@@ -10,30 +10,37 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.logic.ConnectionFactory;
 
 public class LandingController extends BasicController{
 	
 	private final String customerRegViewPath = "/fxml/CustomerDetailsView.fxml";
 	private final String productRegViewPath = "/fxml/ProductDetailsView.fxml";
+	private final String productManViewPath = "/fxml/ProductInfoView.fxml";
 
 	@FXML
-	private Button regCustomerBtn;
+	private Button regCustomer_Btn;
 	
 	@FXML
-	private Button regProductBtn;
+	private Button regProduct_Btn;
 	
 	@FXML
-	private Button regOrderBtn;
+	private Button manProduct_Btn;
 	
 	@FXML
-	private Button manOrderBtn;
+	private Button regOrder_Btn;
 	
 	@FXML
-	private Button genReportBtn;
+	private Button manOrder_Btn;
+	
+	@FXML
+	private Button genReport_Btn;
 	
 	public void initialize() {
 		
-		regCustomerBtn.setOnAction(event -> {
+		ConnectionFactory.getSession();
+		
+		regCustomer_Btn.setOnAction(event -> {
 			try {
 				switchToView(event, customerRegViewPath);
 			} catch (IOException e) {
@@ -41,7 +48,7 @@ public class LandingController extends BasicController{
 			}
 		});
 		
-		regProductBtn.setOnAction(event -> {
+		regProduct_Btn.setOnAction(event -> {
 			try {
 				switchToView(event, productRegViewPath);
 			} catch (IOException e) {
@@ -49,15 +56,23 @@ public class LandingController extends BasicController{
 			}
 		});
 		
-		regOrderBtn.setOnAction(event -> {
+		manProduct_Btn.setOnAction(event -> {
+			try {
+				switchToView(event, productManViewPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		regOrder_Btn.setOnAction(event -> {
 			
 		});
 
-		manOrderBtn.setOnAction(event -> {
+		manOrder_Btn.setOnAction(event -> {
 	
 		});
 		
-		genReportBtn.setOnAction(event -> {
+		genReport_Btn.setOnAction(event -> {
 			
 		});
 	}	

@@ -8,13 +8,15 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	
+	private final String landingViewPath = "/fxml/LandingView.fxml";
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LandingView.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource(landingViewPath));
 		
 		Scene scene = new Scene(root, 800, 600);
 		
-		primaryStage.setTitle("BSM Landing View");
+		primaryStage.setTitle("Bronco Store Management");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
