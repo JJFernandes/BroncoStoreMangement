@@ -99,6 +99,10 @@ public class Order {
 	public Date getDate() {
 		return date;
 	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public Time getTime() {
 		return time;

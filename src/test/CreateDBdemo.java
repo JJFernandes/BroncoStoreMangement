@@ -37,7 +37,8 @@ public class CreateDBdemo {
 		try {
 			
 			session.beginTransaction();
-			
+
+
 //			//create Student customer
 //			Customer studentHolder = new Student(
 //					"012071033", //bronco id
@@ -53,86 +54,113 @@ public class CreateDBdemo {
 //			
 //			//persist Student Customer to database
 //			session.save(studentHolder);
-			
-			
-			//create Professor customer
-			Customer professorHolder = new Professor(
-					"011580335", //bronco id
-					"Neil Gilligan", //name
-					Date.valueOf("1992-06-09"), //dob
-					"981-454-0666", //phone
-					new Address("9743", "Thompson Ave.", "Montclair", "CA", "31694"), //address
-					"Computer Science", //department
-					"8-43", //ofice
-					"Cyber Security" //research
-					);
-			
-			//persist Professor Customer to database
-			session.save(professorHolder);
-			
-			
-			
-			//create StudentProfessor customer
-			Customer studentProfessorHolder = new StudentProfessor(
-					"013648922", //bronco id
-					"Morris Wagner", //name
-					Date.valueOf("1993-07-20"), //dob
-					"011-962-7516", //phone
-					new Address("9278", "Newland Rd.", "Waterford", "CA", "51694"), //address
-					Date.valueOf("2013-08-20"), //enter date
-					Date.valueOf("2071-07-05"), //grad date
-					"Biology", //major
-					"Biochemistry", //minor
-					"Biology", //department
-					"4-32", //ofice
-					"Genetics" //research
-					);
-			
-			//persist StudentProfessor to database
-			session.save(studentProfessorHolder);
-			
-			
-			
-			//create Pencil product
-			Product productHolder = new Product("Pencil");
-			//create HistoricalPrice
-			HistoricalPrice hpHolder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.25));
-			//set Product price to HistoricalPrice and add HistoricalPrice to Product history
-			productHolder.setPrice(hpHolder);
-			//set HistoricalPrice product link to Product
-			hpHolder.setProduct(productHolder);
-			
-			//persist Product and Historical Price to database
-			session.save(productHolder);
-			session.save(hpHolder);
-			
-			
-			
-			Product product2Holder = new Product("Paper");
-			HistoricalPrice hp2Holder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.10));
-			product2Holder.setPrice(hp2Holder);
-			hp2Holder.setProduct(product2Holder);
-			HistoricalPrice hp3Holder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.15));
-			product2Holder.setPrice(hp3Holder);
-			hp3Holder.setProduct(product2Holder);
-			
-			session.save(product2Holder);
-			session.save(hp2Holder);
-			session.save(hp3Holder);
-			
-			
-			
-			//create Order
-			Order orderHolder = new Order();
-			//set Order customer to Student Customer
-			orderHolder.setCustomer(professorHolder);
-			//add Product and Quantity to product_quantity HashMap
-			orderHolder.addProductAndQuantity(productHolder, 2);
-			orderHolder.addProductAndQuantity(product2Holder, 5);	
-			professorHolder.addNewOrder(orderHolder);
-			
-			//persist Order to database
-			session.save(orderHolder);
+//			
+//			
+//			//create Professor customer
+//			Customer professorHolder = new Professor(
+//					"011580335", //bronco id
+//					"Neil Gilligan", //name
+//					Date.valueOf("1992-06-09"), //dob
+//					"981-454-0666", //phone
+//					new Address("9743", "Thompson Ave.", "Montclair", "CA", "31694"), //address
+//					"Computer Science", //department
+//					"8-43", //ofice
+//					"Cyber Security" //research
+//					);
+//			
+//			//persist Professor Customer to database
+//			session.save(professorHolder);
+//			
+//			
+//			
+//			//create StudentProfessor customer
+//			Customer studentProfessorHolder = new StudentProfessor(
+//					"013648922", //bronco id
+//					"Morris Wagner", //name
+//					Date.valueOf("1993-07-20"), //dob
+//					"011-962-7516", //phone
+//					new Address("9278", "Newland Rd.", "Waterford", "CA", "51694"), //address
+//					Date.valueOf("2013-08-20"), //enter date
+//					Date.valueOf("2019-07-05"), //grad date
+//					"Biology", //major
+//					"Biochemistry", //minor
+//					"Biology", //department
+//					"4-32", //ofice
+//					"Genetics" //research
+//					);
+//			
+//			//persist StudentProfessor to database
+//			session.save(studentProfessorHolder);
+//			
+//			
+//			
+//			//create Pencil product
+//			Product productHolder = new Product("Pencil");
+//			//create HistoricalPrice
+//			HistoricalPrice hpHolder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.25));
+//			//set Product price to HistoricalPrice and add HistoricalPrice to Product history
+//			productHolder.setPrice(hpHolder);
+//			//set HistoricalPrice product link to Product
+//			hpHolder.setProduct(productHolder);
+//			
+//			//persist Product and Historical Price to database
+//			session.save(productHolder);
+//			session.save(hpHolder);
+//			
+//			
+//			
+//			Product product2Holder = new Product("Paper");
+//			HistoricalPrice hp2Holder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.10));
+//			product2Holder.setPrice(hp2Holder);
+//			hp2Holder.setProduct(product2Holder);
+//			HistoricalPrice hp3Holder = new HistoricalPrice(Date.valueOf(LocalDate.now()), BigDecimal.valueOf(0.15));
+//			product2Holder.setPrice(hp3Holder);
+//			hp3Holder.setProduct(product2Holder);
+//			
+//			session.save(product2Holder);
+//			session.save(hp2Holder);
+//			session.save(hp3Holder);
+//			
+//			
+//			
+//			//create Order
+//			Order orderHolder = new Order();
+//			//set Order customer to Student Customer
+//			orderHolder.setCustomer(studentHolder);
+//			orderHolder.setDate(Date.valueOf("2021-10-30"));
+//			//add Product and Quantity to product_quantity HashMap
+//			orderHolder.addProductAndQuantity(productHolder, 2);
+//			orderHolder.addProductAndQuantity(product2Holder, 5);	
+//			studentHolder.addNewOrder(orderHolder);
+//			
+//			//persist Order to database
+//			session.save(orderHolder);
+//			
+//			//create Order
+//			Order order2Holder = new Order();
+//			//set Order customer to Student Customer
+//			order2Holder.setCustomer(professorHolder);
+//			order2Holder.setDate(Date.valueOf("2021-11-4"));
+//			//add Product and Quantity to product_quantity HashMap
+//			order2Holder.addProductAndQuantity(productHolder, 7);
+//			order2Holder.addProductAndQuantity(product2Holder, 3);	
+//			professorHolder.addNewOrder(order2Holder);
+//			
+//			//persist Order to database
+//			session.save(order2Holder);
+//			
+//			//create Order
+//			Order order3Holder = new Order();
+//			//set Order customer to Student Customer
+//			order3Holder.setCustomer(studentProfessorHolder);
+//			order3Holder.setDate(Date.valueOf("2021-11-17"));
+//			//add Product and Quantity to product_quantity HashMap
+//			order3Holder.addProductAndQuantity(productHolder, 5);
+//			order3Holder.addProductAndQuantity(product2Holder, 5);	
+//			studentProfessorHolder.addNewOrder(order3Holder);
+//			
+//			//persist Order to database
+//			session.save(order3Holder);
 			
 			
 			//commit changes to database
