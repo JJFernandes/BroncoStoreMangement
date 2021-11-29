@@ -57,6 +57,29 @@ public abstract class Customer {
 		this.orders.add(o);
 	}
 
+	public String getBronco_id() {
+		return bronco_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
 }
 
 	

@@ -66,11 +66,11 @@ public class ProductLogic {
 		return true;
 	}
 	
-	public static ObservableList<Product> getProductObservableList() {
+	public static List<Product> getProductList() {
 		
 		Session s = null;
 		
-		ObservableList<Product> data = null;
+		List<Product> data = null;
 		
 		try {
 			s = ConnectionFactory.getSession();
@@ -80,7 +80,7 @@ public class ProductLogic {
 			CriteriaBuilder builder = s.getCriteriaBuilder();
 		    CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
 		    criteria.from(Product.class);
-		    data = FXCollections.observableList(s.createQuery(criteria).getResultList());		    
+		    data = s.createQuery(criteria).getResultList();		    
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

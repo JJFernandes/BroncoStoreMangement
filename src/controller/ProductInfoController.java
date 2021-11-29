@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.NumberFormat;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class ProductInfoController extends BasicController{
 	@FXML private TableView<Product> products_tbl;
 	@FXML private TableColumn<Product, Integer> prod_id_col;
 	@FXML private TableColumn<Product, String> prod_name_col;
-	@FXML private TableColumn<Product, BigDecimal> prod_price_col;
+	@FXML private TableColumn<Product, String> prod_price_col;
 	
 	@FXML private Label id_lbl;
 	@FXML private Label name_lbl;
@@ -35,7 +36,7 @@ public class ProductInfoController extends BasicController{
 	
 	@FXML private TableView<HistoricalPrice> history_tbl;
 	@FXML private TableColumn<HistoricalPrice, Date> hist_date_col;
-	@FXML private TableColumn<HistoricalPrice, BigDecimal> hist_price_col;
+	@FXML private TableColumn<HistoricalPrice, String> hist_price_col;
 	
 	@FXML private TextField newPrice_txtF;
 	@FXML private Button setNewPrice_Btn;
@@ -58,16 +59,19 @@ public class ProductInfoController extends BasicController{
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();		
 		
 		hist_date_col.setCellValueFactory(new PropertyValueFactory<>("date"));
-		hist_price_col.setCellValueFactory(new PropertyValueFactory<>("price"));
+		hist_price_col.setCellValueFactory(cellData -> {
+			return new SimpleStringProperty(formatter.format(cellData.getValue().getPrice()));
+		});
 		history_tbl.getSortOrder().add(hist_date_col);
 		
 		prod_id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
 		prod_name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
-		prod_price_col.setCellValueFactory(new PropertyValueFactory<>("price"));
-		prod_price_col.setCellValueFactory(new PropertyValueFactory<>("price"));
+		prod_price_col.setCellValueFactory(cellData -> {
+			return new SimpleStringProperty(formatter.format(cellData.getValue().getPrice()));
+		});
 		products_tbl.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		products_tbl.getSortOrder().add(prod_id_col);
-		products_tbl.setItems(getProductsFromDB());
+		
 		
 		products_tbl.getSelectionModel().selectedItemProperty().addListener((OBS, OLD, NEW) -> {
 			id_lbl.setText(NEW.getId().toString());
@@ -79,22 +83,21 @@ public class ProductInfoController extends BasicController{
 			setNewPrice_Btn.setOnAction(event -> {
 				if(NEW != null && !newPrice_txtF.getText().equals("")) {
 					buttonActionSetProductPrice(NEW, new BigDecimal(newPrice_txtF.getText()));
-					try {
-						switchToView(event, productManViewPath);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					products_tbl.refresh();
+					history_tbl.refresh();
+					
 				}
 			});
 			
 		});
 		
+		products_tbl.setItems(getProductsFromDB());
 		products_tbl.getSelectionModel().selectFirst();
 		
 	}
 	
 	private ObservableList<Product> getProductsFromDB() {
-		return ProductLogic.getProductObservableList();
+		return FXCollections.observableList(ProductLogic.getProductList());
 	}
 	
 	private void buttonActionSetProductPrice(Product p, BigDecimal price) {

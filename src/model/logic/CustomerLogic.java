@@ -2,6 +2,7 @@ package model.logic;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -165,6 +166,33 @@ public class CustomerLogic {
 		}
 		
 		return true;
+	}
+	
+	public static List<Customer> getCustomerList() {
+		
+		Session s = null;
+		
+		List<Customer> data = null;
+		
+		try {
+			s = ConnectionFactory.getSession();
+			
+			s.beginTransaction();
+			
+			CriteriaBuilder builder = s.getCriteriaBuilder();
+		    CriteriaQuery<Customer> criteria = builder.createQuery(Customer.class);
+		    criteria.from(Customer.class);
+		    data = s.createQuery(criteria).getResultList();		    
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		
+		return data;
+		
 	}
 
 }

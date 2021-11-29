@@ -38,21 +38,21 @@ public class CreateDBdemo {
 			
 			session.beginTransaction();
 			
-			//create Student customer
-			Customer studentHolder = new Student(
-					"012071033", //bronco id
-					"Joshua Fernandes", //name
-					Date.valueOf("1997-01-01"), //dob
-					"917-285-7362", //phone
-					new Address("8438", "Lake St.", "Savannah", "CA", "31404"), //address
-					Date.valueOf("2016-08-20"), //enter date
-					Date.valueOf("2021-06-03"), //grad date
-					"Computer Science", //major
-					"N/A" //minor
-					);
-			
-			//persist Student Customer to database
-			session.save(studentHolder);
+//			//create Student customer
+//			Customer studentHolder = new Student(
+//					"012071033", //bronco id
+//					"Joshua Fernandes", //name
+//					Date.valueOf("1997-01-01"), //dob
+//					"917-285-7362", //phone
+//					new Address("8438", "Lake St.", "Savannah", "CA", "31404"), //address
+//					Date.valueOf("2016-08-20"), //enter date
+//					Date.valueOf("2021-06-03"), //grad date
+//					"Computer Science", //major
+//					"N/A" //minor
+//					);
+//			
+//			//persist Student Customer to database
+//			session.save(studentHolder);
 			
 			
 			//create Professor customer
@@ -125,11 +125,11 @@ public class CreateDBdemo {
 			//create Order
 			Order orderHolder = new Order();
 			//set Order customer to Student Customer
-			orderHolder.setCustomer(studentHolder);
+			orderHolder.setCustomer(professorHolder);
 			//add Product and Quantity to product_quantity HashMap
 			orderHolder.addProductAndQuantity(productHolder, 2);
 			orderHolder.addProductAndQuantity(product2Holder, 5);	
-			studentHolder.addNewOrder(orderHolder);
+			professorHolder.addNewOrder(orderHolder);
 			
 			//persist Order to database
 			session.save(orderHolder);

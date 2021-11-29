@@ -17,6 +17,8 @@ public class LandingController extends BasicController{
 	private final String customerRegViewPath = "/fxml/CustomerDetailsView.fxml";
 	private final String productRegViewPath = "/fxml/ProductDetailsView.fxml";
 	private final String productManViewPath = "/fxml/ProductInfoView.fxml";
+	private final String orderRegViewPath = "/fxml/OrderRegistrationCustomersView.fxml";
+	private final String orderManViewPath = "/fxml/OrderManagementOrdersView.fxml";
 
 	@FXML
 	private Button regCustomer_Btn;
@@ -65,11 +67,19 @@ public class LandingController extends BasicController{
 		});
 		
 		regOrder_Btn.setOnAction(event -> {
-			
+			try {
+				switchToView(event, orderRegViewPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
 		});
 
 		manOrder_Btn.setOnAction(event -> {
-	
+			try {
+				switchToView(event, orderManViewPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 		
 		genReport_Btn.setOnAction(event -> {
